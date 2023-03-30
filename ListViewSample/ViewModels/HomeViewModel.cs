@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ListViewSample.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ListViewSample.ViewModels
 {
   internal class HomeViewModel : ViewModelBase
   {
-    public HomeViewModel()
+    public HomeViewModel(ISettingService setting) : base(setting)
     {
 
     }

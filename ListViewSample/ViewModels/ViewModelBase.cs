@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ListViewSample.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +11,37 @@ namespace ListViewSample.ViewModels
 {
   internal class ViewModelBase : ObservableObject
   {
-		private int viewCounter = 0;
-		public int ViewCounter
+    #region Fields
+
+    protected readonly ISettingService setting;
+
+    #endregion
+
+    #region Properties
+
+    private int viewCounter = 0;
+    public int ViewCounter
 		{
 			get => viewCounter;
 			set => SetProperty(ref viewCounter, value);
 		}
 
-		public IRelayCommand LoadCommand { get; }
+    #endregion
+
+    #region Commands
+
+    public IRelayCommand LoadCommand { get; }
 		public IRelayCommand UnloadCommand { get; }
 
-		protected ViewModelBase()
+    #endregion
+
+		protected ViewModelBase(ISettingService setting)
 		{
+      this.setting = setting;
+
 			LoadCommand = new RelayCommand(OnLoad);
 			UnloadCommand = new RelayCommand(OnUnload);
-		}
+    }
 
     protected virtual void OnLoad()
     {

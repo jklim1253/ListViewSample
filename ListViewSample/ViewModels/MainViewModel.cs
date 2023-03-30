@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using ListViewSample.Messages;
+using ListViewSample.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace ListViewSample.ViewModels
     }
 
 
-    public MainViewModel()
+    public MainViewModel(ISettingService setting) : base(setting)
     {
       CurrentView = "LoadingView.xaml";
     }

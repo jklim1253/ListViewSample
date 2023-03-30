@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using ListViewSample.Messages;
+using ListViewSample.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,8 @@ namespace ListViewSample.ViewModels
       set => SetProperty(ref loadingPercent, value);
     }
 
-    public LoadingViewModel()
+    public LoadingViewModel(ISettingService setting) : base(setting)
     {
-
     }
 
     private DispatcherTimer timer = null!;
@@ -33,6 +33,8 @@ namespace ListViewSample.ViewModels
       timer.Interval = TimeSpan.FromMilliseconds(10);
       timer.Tick += OnTick;
       timer.Start();
+
+      setting.Load(setting.SettingFile);
     }
 
     protected override void OnUnload()
